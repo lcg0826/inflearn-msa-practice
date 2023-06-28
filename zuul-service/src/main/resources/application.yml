@@ -9,7 +9,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 spring:
   application:
-    name: gateway-service
+    name: zuul-service
   cloud:
     gateway:
       routes:
@@ -17,7 +17,15 @@ spring:
           uri: http://localhost:8081/
           predicates:
             - Path=/first-service/**
+          filters:
+#            - AddRequestHeader=first-request, first-requests-header2
+#            - AddResponseHeader=first-response, first-response-header2
+            - CustomFilter
         - id: second-service
           uri: http://localhost:8082/
           predicates:
             - Path=/second-service/**
+          filters:
+#            - AddRequestHeader=second-request, second-requests-header2
+#            - AddResponseHeader=second-response, second-response-header2
+            - CustomFilter
