@@ -29,3 +29,14 @@ spring:
 #            - AddRequestHeader=second-request, second-requests-header2
 #            - AddResponseHeader=second-response, second-response-header2
             - CustomFilter
+            - name: LoggingFilter
+              args:
+                baseMessage: logging filter ~!
+                preLogger: true
+                postLogger: true
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway GlobalFilter!!
+            preLogger: true
+            postLogger: true
