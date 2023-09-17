@@ -9,6 +9,6 @@ spring:
     config:
       server:
         git:
-          uri: file:///c/dev/inflearn-msa-practice/
+          uri: file:///c:/dev/inflearn-msa-practice/
 
 
