@@ -28,3 +28,13 @@ eureka:
 
 greeting:
   message: welcome~
+
+logging:
+  level:
+    com.example.userservice: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
