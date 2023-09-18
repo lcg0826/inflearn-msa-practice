@@ -34,7 +34,7 @@ public class WebSecurity {
         http.authorizeRequests(authorize -> authorize
                 .requestMatchers("/actuator/**").permitAll() // "/users/**" 패턴에 대한 권한 설정
 //                .requestMatchers("/users/**").permitAll() // "/users/**" 패턴에 대한 권한 설정
-                .requestMatchers("/**").authenticated()
+                .requestMatchers("/**").permitAll() // "/users/**" 패턴에 대한 권한 설정
                 .anyRequest().access("hasIpAddress('" + "192.168.0.12" + "')")) // 나머지 URL 패턴에 대한 IP 주소 기반 권한 설정
                 .addFilter(getAuthenticationFilter())
         ;
