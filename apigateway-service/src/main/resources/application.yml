@@ -37,7 +37,7 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
-            - Method=POST
+            - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
@@ -68,3 +68,12 @@ spring:
             baseMessage: Spring Cloud Gateway GlobalFilter!!
             preLogger: true
             postLogger: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
+
+token:
+  secret: user_token
