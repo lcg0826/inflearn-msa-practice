@@ -42,7 +42,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        super.successfulAuthentication(request, response, chain, authResult);
+        // 이거 아래 주석 안하면 403 error 아니라 404 에러 뱉음.
+//        super.successfulAuthentication(request, response, chain, authResult);
     }
 
 }
