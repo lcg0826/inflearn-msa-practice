@@ -54,6 +54,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
 
+        log.debug(((User) authResult.getPrincipal()).getUsername());
+
         String userName = ((User) authResult.getPrincipal()).getUsername();
         UserDto userDetails = userService.getUserDetailsByEmail(userName);
         // 이거 아래 주석 안하면 403 error 아니라 404 에러 뱉음.
