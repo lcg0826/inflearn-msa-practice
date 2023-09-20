@@ -21,7 +21,6 @@ public class WebSecurity {
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ObjectPostProcessor<Object> objectPostProcessor;
-    
     @Bean
     protected SecurityFilterChain config(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable());
