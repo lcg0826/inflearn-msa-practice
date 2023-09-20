@@ -2,6 +2,7 @@ package com.example.zuulservice.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHeaders;
+import io.jsonwebtoken.Jwts;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.env.Environment;
@@ -51,9 +52,18 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         boolean returnValue = true;
 
         String subject = null;
-        subject = Jwts.parser().setSigningKey(env.getProperty("token.secret"))
-                .parserClaimsJws(jwt).getBody()
-                .getSubject();
+
+        try {
+            subject = Jwts.parser().setSigningKey(env.getProperty("token.secret"))
+                    .parseClaimsJws(jwt).getBody()
+                    .getSubject();
+        } catch (Exception ex) {
+            returnValue = false;
+        }
+
+        if(subject == null || subject.isEmpty()) {
+            returnValue = false;
+        }
 
 
         return returnValue;
