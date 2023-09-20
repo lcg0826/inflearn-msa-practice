@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Slf4j
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -58,6 +59,16 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         String userName = ((User) authResult.getPrincipal()).getUsername();
         UserDto userDetails = userService.getUserDetailsByEmail(userName);
+
+        String token = Jwts.builder()
+                .setSubject(userDetails.getUserId())
+                .setExpiration(new Date(System.currentTimeMillis() +
+                        Long.parseLong(env.getProperty("token.expiration_time"))))
+                        .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
+                        .compact();
+
+        response.addHeader("token", token);
+        response.addHeader("userId", userDetails.getUserId());
         // 이거 아래 주석 안하면 403 error 아니라 404 에러 뱉음.
 //        super.successfulAuthentication(request, response, chain, authResult);
     }
