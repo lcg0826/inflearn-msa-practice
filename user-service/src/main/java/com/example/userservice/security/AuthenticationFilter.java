@@ -30,6 +30,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private UserService userService;
     private Environment env;
 
+//    public AuthenticationFilter(AuthenticationManager authenticationManager, UserService userService, Environment env) {
+//        super.setAuthenticationManager(authenticationManager);
+//        this.userService = userService;
+//        this.env = env;
+//    }
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
