@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import io.jsonwebtoken.Jwts;
 import org.springframework.core.env.Environment;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -29,6 +28,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private UserService userService;
     private Environment env;
+
+    public AuthenticationFilter(UserService userService, Environment env) {
+        this.userService = userService;
+        this.env = env;
+    }
 
 //    public AuthenticationFilter(AuthenticationManager authenticationManager, UserService userService, Environment env) {
 //        super.setAuthenticationManager(authenticationManager);
