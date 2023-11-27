@@ -33,6 +33,9 @@ dependencies {
     // javax.xml.bind
     implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
 
+    // rabbit mq relation
+    implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
     implementation 'org.projectlombok:lombok:1.18.26'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

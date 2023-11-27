@@ -5,17 +5,27 @@ server:
 spring:
   application:
     name: config-service
-  profile:
+  profiles:
     active: native
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     config:
       server:
-        native:
-          search-locations: file://${user.home}/dev/native-file-repo
         git:
 #          uri: file:///c:/dev/inflearn-msa-practice/
           uri: https://github.com/lcg0826/inflearn-msa-practice.git
 #          username:
 #          password:
-
-
+        native:
+          # search-locations: file:///${user.home}/dev/native-file-repo
+          search-locations: file:///C:/dev/native-file-repo
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
